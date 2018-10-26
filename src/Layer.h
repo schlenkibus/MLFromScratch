@@ -6,7 +6,7 @@
 class Layer
 {
 public:
-	Layer(int numNodes);
+	explicit Layer(int numNodes);
 	~Layer();
 	virtual std::vector<std::pair<std::shared_ptr<Neuron>, float>> feedForwards(
             std::vector<std::pair<std::shared_ptr<Neuron>, float>> inputs);
