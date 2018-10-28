@@ -1,10 +1,14 @@
 #include "Neuron.h"
+#include "NumTools.h"
 #include <algorithm>
 #include <numeric>
+#include <cassert>
+#include <iostream>
 
 
-Neuron::Neuron()
-= default;
+Neuron::Neuron() {
+	bias = NumTools::getRandomBias();
+}
 
 
 Neuron::~Neuron()
@@ -20,8 +24,13 @@ void Neuron::feedForward(std::vector<std::pair<std::shared_ptr<Neuron>, float>> 
 	});
 
 	auto weightedSum = std::accumulate(weightedInputs.begin(), weightedInputs.end(), 0.0);
-	auto biasedSum = weightedSum - bias;
-	activation = static_cast<float>(std::max<double>(1, std::max<double>(0, biasedSum)));
+	auto sumPlusBias = (weightedSum + bias);
+	activation = static_cast<float>(sumPlusBias / (1 + (sumPlusBias > 0 ? sumPlusBias : sumPlusBias * -1)));
+
+	if(activation > 1) {
+		std::cerr << "[ASSERT] Activation is greater than [1]: " << activation << '\n';
+		exit(134);
+	}
 }
 
 void Neuron::feedBackwards(float input)

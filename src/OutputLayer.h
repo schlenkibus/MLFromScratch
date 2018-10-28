@@ -5,6 +5,7 @@ class OutputLayer :
 {
 public:
 	explicit OutputLayer(int numNodes);
+	std::pair<int, float> getGuess();
 	~OutputLayer();
 };
 

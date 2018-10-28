@@ -3,11 +3,12 @@
 
 class NumTools {
 public:
-    static float getRandomNumber(float from, float to) {
-        std::uniform_real_distribution<float> dis(from, to);
-        return dis(gen);
-    }
+    static float getRandomNumber();
 
+    static std::uniform_real_distribution<float> dis;
+    static std::uniform_real_distribution<float> biasDis;
     static std::random_device rd;
     static std::mt19937 gen;
+
+    static float getRandomBias();
 };

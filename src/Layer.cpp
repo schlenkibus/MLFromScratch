@@ -6,7 +6,7 @@
 Layer::Layer(int numNodes)
 {
     for(int i = 0; i < numNodes; i++) {
-        neurons.emplace_back(std::make_shared<Neuron>(), NumTools::getRandomNumber(0, 1));
+        neurons.emplace_back(std::make_shared<Neuron>(), NumTools::getRandomNumber());
     }
 }
 
@@ -28,7 +28,7 @@ std::vector<std::pair<std::shared_ptr<Neuron>, float>> Layer::feedForwards(
 		feed.emplace_back(std::make_pair(pair.first, pair.second));
 	}
 
-	successor->feedForwards(feed);
+	return feed;
 }
 
 void Layer::feedBackwards(std::vector<float> inputs)
